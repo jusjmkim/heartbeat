@@ -23,7 +23,7 @@ Heartbeat
 
 [Summer Wu](https://github.com/sw5813)<br>
 [Justin Kim](https://github.com/jusjmkim)<br>
-Jennifer Ren
+Jennifer Ren<br>
 Joan Shang
 
 ## License
