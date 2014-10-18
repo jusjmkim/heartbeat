@@ -13,10 +13,10 @@ import org.json.JSONObject;
 public class MisfitApiUsage {
 
     public static int workoutBpm() throws JSONException {
-        MisfitApi.get("/move/resource/v1/user/me/activity/sessions", null, new ResponseHandlerInterface) {
+        MisfitApi.get("/move/resource/v1/user/me/activity/sessions", null, new ResponseHandlerInterface()) {
             @Override
-            public void onSuccess() {
-
+            public void onSuccess (int statusCode, Header[] headers, JSONObject response) {
+                return parseJson(response);
             }
         }
     }

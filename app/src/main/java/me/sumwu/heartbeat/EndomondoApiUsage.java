@@ -15,8 +15,8 @@ public class EndomondoApiUsage {
     public static int workoutBpm() throws JSONException {
         EndomondoApi.get("/1/workouts", null, new ResponseHandlerInterface()) {
             @Override
-            public void onSucess() {
-
+            public void onSuccess (int statusCode, Header[] headers, JSONObject response) {
+                return parseJson(response);
             }
         }
     }
