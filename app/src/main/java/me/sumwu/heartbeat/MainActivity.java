@@ -1,5 +1,7 @@
 package me.sumwu.heartbeat;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.NumberPicker;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.loopj.android.http.*;
 
@@ -17,10 +20,26 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class MainActivity extends ActionBarActivity {
+import com.spotify.sdk.android.Spotify;
+import com.spotify.sdk.android.authentication.AuthenticationResponse;
+import com.spotify.sdk.android.authentication.SpotifyAuthentication;
+import com.spotify.sdk.android.playback.ConnectionStateCallback;
+import com.spotify.sdk.android.playback.Player;
+import com.spotify.sdk.android.playback.PlayerNotificationCallback;
+import com.spotify.sdk.android.playback.PlayerState;
 
+import java.util.ArrayList;
+
+public class MainActivity extends ActionBarActivity implements PlayerNotificationCallback, ConnectionStateCallback {
+
+    ArrayList<String> playlist;
+
+    // Music Dealers
     String token;
     int bpm;
+
+    // Spotify
+    private Player mPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +59,11 @@ public class MainActivity extends ActionBarActivity {
 
         bpm = np.getValue();
 
+        // Music Dealers
         authenticate();
+
+        // Spotify
+        SpotifyAuthentication.openAuthWindow(getString(R.string.spotify_client_id), "token", getString(R.string.spotify_redirect_uri), new String[]{"user-read-private", "streaming"}, null, this);
 
     }
 
@@ -63,6 +86,9 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /*
+        MUSIC DEALER + SPOTIFY
+     */
     private void authenticate() {
         // Authenticate with Music Dealer Api
         RequestParams login_params = new RequestParams();
@@ -74,7 +100,6 @@ public class MainActivity extends ActionBarActivity {
                 // called when response HTTP status is "200"
                 try {
                     token = response.get("token").toString();
-                    System.out.println(token);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -93,10 +118,10 @@ public class MainActivity extends ActionBarActivity {
 
         // Find list of songs with the right bpm with Music Dealer Api
         Header[] headers = {new BasicHeader("X-Auth-Token", token)};
-        RequestParams bpm_params = new RequestParams();
-        bpm_params.put("bpm_min", bpm - 5);
-        bpm_params.put("bpm_max", bpm + 5);
-        MusicDealersApi.post(getApplicationContext(), "/songs", headers, bpm_params, "application/json", new JsonHttpResponseHandler() {
+        RequestParams md_params = new RequestParams();
+        md_params.put("bpm_min", bpm - 5);
+        md_params.put("bpm_max", bpm + 5);
+        MusicDealersApi.post(getApplicationContext(), "/songs", headers, md_params, "application/json", new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
@@ -120,9 +145,117 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
+        // Find list of songs from Spotify
+        RequestParams spotify_params = new RequestParams();
+        spotify_params.put("type", "track");
+        spotify_params.put("limit", 1);
+        spotify_params.put("q", "burn");
+        SpotifyApi.get("/search", spotify_params, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                System.out.println(response);
+
+                try {
+                    JSONArray songs = response.getJSONArray("items");
+                    String song_id = songs.getJSONObject(0).getString("id");
+                    Log.i("burn id", song_id);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String errorResponse, Throwable e) {
+                super.onFailure(statusCode, headers, errorResponse, e);
+                System.out.println(errorResponse);
+            }
+        });
+
     }
 
-    public void playMusic(String title) {
-        // Use SpotifyApi to play music
+    /*
+        SPOTIFY
+     */
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        Uri uri = intent.getData();
+        if (uri != null) {
+            AuthenticationResponse response = SpotifyAuthentication.parseOauthResponse(uri);
+            Spotify spotify = new Spotify(response.getAccessToken());
+            mPlayer = spotify.getPlayer(this, "Heartbeat", this, new Player.InitializationObserver() {
+                @Override
+                public void onInitialized() {
+                    mPlayer.addConnectionStateCallback(MainActivity.this);
+                    mPlayer.addPlayerNotificationCallback(MainActivity.this);
+                    mPlayer.play("spotify:track:2TpxZ7JUBn3uw46aR7qd6V");
+                    mPlayer.pause();
+                }
+
+                @Override
+                public void onError(Throwable throwable) {
+                    Log.e("MainActivity", "Could not initialize player: " + throwable.getMessage());
+                }
+            });
+        }
+    }
+
+    @Override
+    public void onLoggedIn() {
+        Log.d("MainActivity", "User logged in");
+    }
+
+    @Override
+    public void onLoggedOut() {
+        Log.d("MainActivity", "User logged out");
+    }
+
+    @Override
+    public void onLoginFailed(Throwable error) {
+        Log.d("MainActivity", "Login failed");
+    }
+
+    @Override
+    public void onTemporaryError() {
+        Log.d("MainActivity", "Temporary error occurred");
+    }
+
+    @Override
+    public void onNewCredentials(String s) {
+        Log.d("MainActivity", "User credentials blob received");
+    }
+
+    @Override
+    public void onConnectionMessage(String message) {
+        Log.d("MainActivity", "Received connection message: " + message);
+    }
+
+    @Override
+    public void onPlaybackEvent(EventType eventType, PlayerState playerState) {
+        Log.d("MainActivity", "Playback event received: " + eventType.name());
+    }
+
+    public void togglePlayPause(View view) {
+        // Get current state of play/pause button
+        boolean off = ((ToggleButton) view).isChecked();
+
+        if (off) {
+            // Play Song
+            mPlayer.resume();
+        } else {
+            // Pause Music
+            mPlayer.pause();
+        }
+    }
+
+    public void playNextSong() {
+        mPlayer.skipToNext();
+    }
+
+    @Override
+    protected void onDestroy() {
+        Spotify.destroyPlayer(this);
+        super.onDestroy();
     }
 }

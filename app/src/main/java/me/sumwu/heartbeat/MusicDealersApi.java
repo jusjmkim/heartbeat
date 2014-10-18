@@ -29,14 +29,6 @@ public class MusicDealersApi {
         client.post(context, getAbsoluteUrl(url), headers, params, contentType, responseHandler);
     }
 
-    public static void get(android.content.Context context,
-                           java.lang.String url,
-                           org.apache.http.Header[] headers,
-                           RequestParams params,
-                           ResponseHandlerInterface responseHandler) {
-        client.get(context, getAbsoluteUrl(url), headers, params, responseHandler);
-    }
-
     private static String getAbsoluteUrl(String relativeUrl) {
         return BASE_URL + relativeUrl;
     }
