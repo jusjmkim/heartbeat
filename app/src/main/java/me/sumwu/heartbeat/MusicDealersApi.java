@@ -26,7 +26,9 @@ public class MusicDealersApi {
                             RequestParams params,
                             java.lang.String contentType,
                             ResponseHandlerInterface responseHandler) {
-        client.post(context, getAbsoluteUrl(url), headers, params, contentType, responseHandler);
+        client.post(context,
+                getAbsoluteUrl("/move/resource/v1/user/me/activity/sessions"),
+                headers, params, contentType, responseHandler);
     }
 
     private static String getAbsoluteUrl(String relativeUrl) {
