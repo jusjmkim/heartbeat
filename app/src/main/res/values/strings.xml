@@ -22,5 +22,6 @@
     <string name="title_activity_end">EndActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_selection">selectionActivity</string>
+    <string name="title_activity_launch">LaunchActivity</string>
 
 </resources>

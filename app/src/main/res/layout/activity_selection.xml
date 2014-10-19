@@ -20,26 +20,30 @@
         android:src="@drawable/c_interval_icon"
         android:layout_width="wrap_content"
         android:layout_height="140dp"
-        android:layout_marginTop="100dp" />
+        android:layout_marginTop="100dp"
+        android:onClick="selectWorkout" />
 
     <ImageView
         android:src="@drawable/c_plateau_icon"
         android:layout_width="wrap_content"
         android:layout_height="140dp"
         android:layout_marginTop="100dp"
-        android:layout_marginLeft="170dp" />
+        android:layout_marginLeft="170dp"
+        android:onClick="selectWorkout" />
 
     <ImageView
         android:src="@drawable/c_sandcastle_icon"
         android:layout_width="wrap_content"
         android:layout_marginTop="280dp"
-        android:layout_height="140dp" />
+        android:layout_height="140dp"
+        android:onClick="selectWorkout" />
 
     <ImageView
         android:src="@drawable/c_flat_icon"
         android:layout_width="wrap_content"
         android:layout_height="140dp"
         android:layout_marginTop="280dp"
-        android:layout_marginLeft="170dp" />
+        android:layout_marginLeft="170dp"
+        android:onClick="selectWorkout" />
 
 </RelativeLayout>

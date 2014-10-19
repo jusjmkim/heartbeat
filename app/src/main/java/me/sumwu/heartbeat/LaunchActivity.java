@@ -1,33 +1,24 @@
 package me.sumwu.heartbeat;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import java.util.ArrayList;
-
 import me.sumwu.heartbeat.R;
 
-public class EndActivity extends Activity {
+public class LaunchActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_end);
-
-        // get pack_position from previous activity with which to query database
-        Intent intent = getIntent();
-        int average_bpm = intent.getExtras().getInt("AVERAGE_BPM");
-        ArrayList<String> playlist = intent.getStringArrayListExtra("PLAYLIST");
+        setContentView(R.layout.activity_launch);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.end, menu);
+        getMenuInflater().inflate(R.menu.launch, menu);
         return true;
     }
 
@@ -42,11 +33,4 @@ public class EndActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-    private void showBPM() {}
-
-    private void displayPlaylist() {}
-
-    private void recommendMD() {}
-
 }
