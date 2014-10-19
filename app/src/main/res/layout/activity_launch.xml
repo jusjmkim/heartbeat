@@ -6,11 +6,32 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@color/red"
     tools:context="me.sumwu.heartbeat.LaunchActivity">
 
+    <ImageView
+        android:src="@drawable/a_heartbeat_icon_white"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"/>
+
     <TextView
-        android:text="@string/hello_world"
+        android:text="heartbeat"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="350dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/white"
+        android:textSize="45dp" />
+
+    <TextView
+        android:text="get started >"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="400dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/white"
+        android:textSize="30dp" />
 
 </RelativeLayout>
