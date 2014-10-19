@@ -15,6 +15,12 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="33dp" />
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/e_finish_button"
+        android:layout_alignParentBottom="true"
+        android:onClick="finish"/>
 
 
     <TextView
@@ -121,34 +127,6 @@
             android:onClick="spotifyConnect" />
 
     </LinearLayout>
-
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/b_md_logo"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/b_endomondo_logo"/>
-
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/b_misfit_logo"/>
-
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/b_spotify_icon"
-            android:layout_alignParentBottom="true"/>
-    </GridLayout>
 
 
 </RelativeLayout>
