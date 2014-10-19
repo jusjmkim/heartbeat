@@ -5,13 +5,13 @@ Heartbeat
 
 
 ## Screenshots
-[Start screen](https://drive.google.com/file/d/0B6PT84V70dgYbUotcXNBTDA4NEk/view?usp=sharing)
-[Authentication screen](https://drive.google.com/file/d/0B6PT84V70dgYVmJ6LW0zM1lJTkk/view?usp=sharing)
-[Select your workout](https://drive.google.com/file/d/0B6PT84V70dgYM2N4Vk96MFpTeXM/view?usp=sharing)
-[Selected workout](https://drive.google.com/file/d/0B6PT84V70dgYdjQ4QnpJclRDMHM/view?usp=sharing)
-[Paused play screen](https://drive.google.com/file/d/0B6PT84V70dgYT2xYbkFoVTRrd2c/view?usp=sharing)
-[Running play screen](https://drive.google.com/file/d/0B6PT84V70dgYRjUtU0JlQ29QTEk/view?usp=sharing)
-[Summary screen](https://drive.google.com/file/d/0B6PT84V70dgYU1pqamRsQ2NXVms/view?usp=sharing)
+[1. Start screen](https://drive.google.com/file/d/0B6PT84V70dgYbUotcXNBTDA4NEk/view?usp=sharing)<br>
+[2. Authentication screen](https://drive.google.com/file/d/0B6PT84V70dgYVmJ6LW0zM1lJTkk/view?usp=sharing)<br>
+[3. Select your workout](https://drive.google.com/file/d/0B6PT84V70dgYM2N4Vk96MFpTeXM/view?usp=sharing)<br>
+[4. Selected workout](https://drive.google.com/file/d/0B6PT84V70dgYdjQ4QnpJclRDMHM/view?usp=sharing)<br>
+[5. Paused play screen](https://drive.google.com/file/d/0B6PT84V70dgYT2xYbkFoVTRrd2c/view?usp=sharing)<br>
+[6. Running play screen](https://drive.google.com/file/d/0B6PT84V70dgYRjUtU0JlQ29QTEk/view?usp=sharing)<br>
+[7. Summary screen](https://drive.google.com/file/d/0B6PT84V70dgYU1pqamRsQ2NXVms/view?usp=sharing)<br>
 
 
 ## Background
