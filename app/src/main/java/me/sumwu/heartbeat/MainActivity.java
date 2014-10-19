@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.loopj.android.http.*;
@@ -32,7 +31,6 @@ import com.spotify.sdk.android.playback.PlayerState;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Random;
 
 public class MainActivity extends ActionBarActivity implements PlayerNotificationCallback, ConnectionStateCallback {
@@ -270,7 +268,21 @@ public class MainActivity extends ActionBarActivity implements PlayerNotificatio
                 }
             });
         }
+
+        // Select workout
+        startActivityForResult(new Intent(getApplicationContext(), SelectionActivity.class), 0);
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 1) {
+                int workout_selection = data.getIntExtra("workout_selection", 0);
+            }
+        }
+    }
+
 
     @Override
     public void onLoggedIn() {
