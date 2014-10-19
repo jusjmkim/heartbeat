@@ -270,19 +270,8 @@ public class MainActivity extends ActionBarActivity implements PlayerNotificatio
         }
 
         // Select workout
-        startActivityForResult(new Intent(getApplicationContext(), SelectionActivity.class), 0);
+        startActivity(new Intent(getApplicationContext(), SelectionActivity.class));
     }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            if (requestCode == 1) {
-                int workout_selection = data.getIntExtra("workout_selection", 0);
-            }
-        }
-    }
-
 
     @Override
     public void onLoggedIn() {
@@ -347,6 +336,7 @@ public class MainActivity extends ActionBarActivity implements PlayerNotificatio
 
     @Override
     protected void onDestroy() {
+        System.out.println("MAIN ACTIVITY DESTROYED OH NO!");
         Spotify.destroyPlayer(this);
         super.onDestroy();
     }

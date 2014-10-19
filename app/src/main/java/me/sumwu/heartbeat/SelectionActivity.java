@@ -38,6 +38,6 @@ public class SelectionActivity extends Activity {
     }
 
     public void selectWorkout(View view) {
-        //setResult(RESULT_OK, intent);
+        finish();
     }
 }
