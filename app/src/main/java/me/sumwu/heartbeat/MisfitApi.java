@@ -32,5 +32,3 @@ public class MisfitApi {
     private static String getAbsoluteUrl(String relativeUrl) { return BASE_URL + relativeUrl;}
 
 }
-
-//todo set up api keys

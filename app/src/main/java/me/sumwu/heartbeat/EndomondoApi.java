@@ -13,18 +13,19 @@ import org.json.JSONObject;
  */
 public class EndomondoApi {
 
-    private static final String BASE_URL = "https://api.endomondo.com/api";
     private static AsyncHttpClient client = new AsyncHttpClient();
 
     public static void get(java.lang.String url,
                           RequestParams params,
                           ResponseHandlerInterface responseHandler) {
         // url should be "/1/workouts"
-        client.get(getAbsoluteUrl(url), params, responseHandler);
+        client.get(url, params, responseHandler);
     }
 
-    private static String getAbsoluteUrl(String relativeUrl) { return BASE_URL + relativeUrl;}
+    public static void post(java.lang.String url,
+                            RequestParams params,
+                            ResponseHandlerInterface responseHandler) {
+        client.post(url, params, responseHandler);
+    }
 
 }
-
-//todo set up api keys
