@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
+import android.widget.RelativeLayout;
 import android.widget.ToggleButton;
 
 import com.loopj.android.http.*;
@@ -52,18 +53,18 @@ public class MainActivity extends ActionBarActivity implements PlayerNotificatio
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        NumberPicker np = (NumberPicker) findViewById(R.id.numberPicker);
-        np.setMaxValue(180);
-        np.setMinValue(50);
-        np.setValue(100);
-        np.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                // Save the value in the number picker
-                bpm = newVal;
-            }
-        });
+//        NumberPicker np = (NumberPicker) findViewById(R.id.numberPicker);
+//        np.setMaxValue(180);
+//        np.setMinValue(50);
+//        np.setValue(100);
+//        np.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+//            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+//                // Save the value in the number picker
+//                bpm = newVal;
+//            }
+//        });
 
-        bpm = np.getValue();
+        bpm = 100;//np.getValue();
     }
 
     @Override
@@ -116,7 +117,7 @@ public class MainActivity extends ActionBarActivity implements PlayerNotificatio
     }
 
     public void spotifyConnect(View view) {
-        LinearLayout auth = (LinearLayout) findViewById(R.id.auth);
+        RelativeLayout auth = (RelativeLayout) findViewById(R.id.auth);
         auth.setVisibility(View.GONE);
 
         SpotifyAuthentication.openAuthWindow(getString(R.string.spotify_client_id), "token", getString(R.string.spotify_redirect_uri), new String[]{"user-read-private", "streaming"}, null, this);

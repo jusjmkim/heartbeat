@@ -38,6 +38,7 @@ public class LaunchActivity extends Activity {
     }
 
     public void getStarted(View view) {
+        finish();
         startActivity(new Intent(getApplicationContext(), MainActivity.class));
     }
 }

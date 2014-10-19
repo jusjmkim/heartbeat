@@ -116,7 +116,7 @@
             android:layout_marginTop="30dp"
             android:textSize="50dp" />
 
-        <ImageView
+        <me.sumwu.heartbeat.DarkenButton
             android:id="@+id/spotify_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -133,7 +133,7 @@
             android:layout_marginLeft="60dp"
             android:textSize="20dp" />
 
-        <ImageView
+        <me.sumwu.heartbeat.DarkenButton
             android:id="@+id/md_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -150,7 +150,7 @@
             android:layout_marginLeft="210dp"
             android:textSize="20dp"/>
 
-        <ImageView
+        <me.sumwu.heartbeat.DarkenButton
             android:id="@+id/endomondo_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -166,7 +166,7 @@
             android:layout_marginLeft="40dp"
             android:textSize="20dp"/>
 
-        <ImageView
+        <me.sumwu.heartbeat.DarkenButton
             android:id="@+id/misfit_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
