@@ -7,43 +7,36 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="bpm"
-        android:id="@+id/textView"
-        android:layout_marginBottom="49dp"
-        android:layout_alignBottom="@+id/numberPicker" />
+        android:textSize="30dp"
+        android:text="Current Song"
+        android:id="@+id/current_song"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="100 bpm"
-        android:id="@+id/textView2"
-        android:layout_above="@+id/toggleButton"
-        android:layout_alignRight="@+id/textView3"
-        android:layout_alignEnd="@+id/textView3" />
+        android:textSize="24dp"
+        android:text="Artist"
+        android:id="@+id/current_artist"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/current_song" />
 
-    <ImageView
+    <me.sumwu.heartbeat.DarkenButton
         android:src="@drawable/e_play_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textOn="Pause"
         android:textOff="Play"
         android:id="@+id/toggleButton"
-        android:layout_marginBottom="230dp"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@id/current_song"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
         android:checked="false"
         android:onClick="togglePlayPause" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Current Song"
-        android:id="@+id/textView3"
-        android:layout_above="@+id/textView2"
-        android:layout_toLeftOf="@+id/numberPicker" />
-
-    <ImageView
+    <me.sumwu.heartbeat.DarkenButton
         android:src="@drawable/e_skip_icon"
         android:layout_width="200dp"
         android:layout_height="70dp"
@@ -51,6 +44,25 @@
         android:layout_marginTop="190dp"
         android:layout_marginLeft="250dp"
         android:onClick="playNextSong" />
+
+    <SeekBar
+        android:id="@+id/slider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bpm"
+        android:layout_marginBottom="10dp"
+        android:progress="100"
+        android:max="180" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="120 bpm"
+        android:id="@+id/bpm"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="160dp"
+        android:textSize="30dp"/>
 
     <me.sumwu.heartbeat.DarkenButton
         android:layout_width="200dp"
@@ -60,16 +72,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="50dp"
         android:onClick="finish"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="120 bpm"
-        android:id="@+id/textView5"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="125dp"
-        android:textSize="30dp"/>
 
 <!-- Authentication -->
     <RelativeLayout
