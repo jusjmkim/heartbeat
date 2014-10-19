@@ -27,13 +27,10 @@
         android:src="@drawable/e_play_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textOn="Pause"
-        android:textOff="Play"
         android:id="@+id/toggleButton"
         android:layout_below="@id/current_song"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="70dp"
-        android:checked="false"
         android:onClick="togglePlayPause" />
 
     <me.sumwu.heartbeat.DarkenButton
@@ -51,8 +48,8 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/bpm"
         android:layout_marginBottom="10dp"
-        android:progress="100"
-        android:max="180" />
+        android:progress="70"
+        android:max="130" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -80,7 +77,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@color/white"
-        android:visibility="gone" >
+         >
 
         <TextView
             android:text="Connect with"

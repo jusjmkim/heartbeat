@@ -9,9 +9,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
+import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.loopj.android.http.*;
@@ -41,19 +45,47 @@ public class MainActivity extends ActionBarActivity implements PlayerNotificatio
     ArrayList<String> current_playlist = new ArrayList<String>();
     ArrayList<String> final_playlist = new ArrayList<String>();
 
+    TextView seekbar_bpm;
+    private SeekBar seekbar = null;
+
     // Music Dealers
     String token;
     int bpm;
 
     // Spotify
     private Player mPlayer;
+    boolean paused;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        bpm = 100;
+        seekbar = (SeekBar) findViewById(R.id.slider);
+        seekbar_bpm = (TextView) findViewById(R.id.bpm);
+
+        seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            int progressChanged = 0;
+
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
+                progressChanged = progress + 50;
+            }
+
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                // TODO Auto-generated method stub
+            }
+
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                seekbar_bpm.setText(progressChanged + " bpm");
+                bpm = progressChanged;
+                mPlayer.clearQueue();
+                findMusic();
+            }
+        });
+
+        // initialize beats per minute and paused music
+        bpm = 120;
+        paused = true;
     }
 
     @Override
@@ -115,7 +147,7 @@ public class MainActivity extends ActionBarActivity implements PlayerNotificatio
     /*
         GENERATING THE PLAYLIST
      */
-    public void findMusic(View view) {
+    public void findMusic() {
         // Find list of songs with the right bpm with Music Dealer Api
         Header[] headers = {new BasicHeader("X-Auth-Token", token)};
         RequestParams md_params = new RequestParams();
@@ -239,6 +271,9 @@ public class MainActivity extends ActionBarActivity implements PlayerNotificatio
         for (int i = 0; i < current_playlist.size(); i++) {
             mPlayer.queue("spotify:track:" + current_playlist.get(i));
         }
+        en_potential_songs = new ArrayList<String[]>();
+        md_potential_songs = new ArrayList<String[]>();
+        current_playlist = new ArrayList<String>();
         Log.i("queue", current_playlist.toString());
     }
 
@@ -308,17 +343,21 @@ public class MainActivity extends ActionBarActivity implements PlayerNotificatio
     }
 
     public void togglePlayPause(View view) {
+        ImageView selection = (ImageView) view;
+
         updateQueue();
 
         // Get current state of play/pause button
-        boolean off = ((ToggleButton) view).isChecked();
-
-        if (off) {
+        if (paused) {
             // Play Song
             mPlayer.resume();
+            selection.setImageResource(R.drawable.f_pause_button);
+            paused = false;
         } else {
             // Pause Music
             mPlayer.pause();
+            selection.setImageResource(R.drawable.e_play_button);;
+            paused = true;
         }
     }
 
@@ -335,7 +374,6 @@ public class MainActivity extends ActionBarActivity implements PlayerNotificatio
 
     @Override
     protected void onDestroy() {
-        System.out.println("MAIN ACTIVITY DESTROYED OH NO!");
         Spotify.destroyPlayer(this);
         super.onDestroy();
     }
