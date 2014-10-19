@@ -3,6 +3,20 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
+        <item name="android:textColor">@color/red</item>
+        <item name="android:actionBarStyle">@style/CokeActionBarTheme</item>
     </style>
+
+    <!-- Coke Style -->
+    <style name="CokeActionBarTheme" parent="@android:style/Widget.Holo.ActionBar">
+        <item name="android:background">@color/red</item>
+        <item name="android:icon">@drawable/a_heartbeat_icon_white</item>
+        <item name="android:titleTextStyle">@style/CokeActionBarTitleText</item>
+    </style>
+
+    <style name="CokeActionBarTitleText" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
 
 </resources>
