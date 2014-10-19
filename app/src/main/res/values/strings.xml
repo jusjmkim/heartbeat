@@ -17,5 +17,6 @@
 
     <string name="connect">Connect</string>
     <string name="connect_spotify">Connect with Spotify</string>
+    <string name="connect_md">Connect with Music Dealers</string>
 
 </resources>

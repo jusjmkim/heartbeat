@@ -1,5 +1,6 @@
 package me.sumwu.heartbeat;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
@@ -33,7 +34,9 @@ import java.util.ArrayList;
 
 public class MainActivity extends ActionBarActivity implements PlayerNotificationCallback, ConnectionStateCallback {
 
-    ArrayList<String> playlist;
+    ArrayList<String> potential_songs = new ArrayList<String>();
+    ArrayList<String> current_playlist = new ArrayList<String>();
+    ArrayList<String> future_playlist = new ArrayList<String>();
 
     // Music Dealers
     String token;
@@ -59,9 +62,6 @@ public class MainActivity extends ActionBarActivity implements PlayerNotificatio
         });
 
         bpm = np.getValue();
-
-        // Authenticate with Music Dealers
-        mdAuth();
     }
 
     @Override
@@ -83,7 +83,12 @@ public class MainActivity extends ActionBarActivity implements PlayerNotificatio
         return super.onOptionsItemSelected(item);
     }
 
-    public void mdAuth() {
+    public void mdConnect(View view) {
+        final ProgressDialog progress = new ProgressDialog(this);
+        progress.setTitle("Connecting");
+        progress.setMessage("Just a few more seconds...");
+        progress.show();
+
         // Authenticate with Music Dealer Api
         RequestParams login_params = new RequestParams();
         login_params.put("username", getString(R.string.md_username));
@@ -97,6 +102,7 @@ public class MainActivity extends ActionBarActivity implements PlayerNotificatio
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                progress.dismiss();
             }
 
             @Override
@@ -129,16 +135,23 @@ public class MainActivity extends ActionBarActivity implements PlayerNotificatio
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
-                System.out.println(response);
 
+                // Get all songs with the required bpm
                 try {
                     JSONArray songs = response.getJSONArray("results");
                     for (int i = 0; i < songs.length(); i++) {
                         JSONObject song = songs.getJSONObject(i);
-                        //System.out.println(song.get("title"));
+                        potential_songs.add(song.get("title").toString());
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                }
+
+                System.out.println("POTENTIAL MD SONGS: " + potential_songs);
+
+                // Determine which of those songs are available on Spotify
+                for (int i = 0; i < potential_songs.size(); i++) {
+                    String title = potential_songs.get(0);
                 }
             }
 
@@ -154,8 +167,9 @@ public class MainActivity extends ActionBarActivity implements PlayerNotificatio
         en_params.put("api_key", getString(R.string.echonest_api_key));
         en_params.put("genre", "pop");
         en_params.put("format", "json");
-        en_params.put("results", "20");
+        en_params.put("results", "100");
         en_params.put("type", "genre-radio");
+        en_params.put("bucket", "tempo");
         EchoNestApi.get("playlist/basic", en_params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -170,6 +184,10 @@ public class MainActivity extends ActionBarActivity implements PlayerNotificatio
             }
         });
 
+    }
+
+    // CHECK WHICH SONGS FROM MUSIC DEALERS ARE AVAILABLE ON SPOTIFY
+    private boolean checkSpotifyAvailability(String title) {
         // Find list of songs from Spotify
         RequestParams spotify_params = new RequestParams();
         spotify_params.put("type", "track");
@@ -197,6 +215,7 @@ public class MainActivity extends ActionBarActivity implements PlayerNotificatio
             }
         });
 
+        return true;
     }
 
     /*

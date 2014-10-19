@@ -110,6 +110,14 @@
             android:layout_height="wrap_content"
             android:text="@string/connect_spotify"
             android:onClick="spotifyConnect" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/connect_md"
+            android:onClick="mdConnect" />
+
     </LinearLayout>
 
 </RelativeLayout>
