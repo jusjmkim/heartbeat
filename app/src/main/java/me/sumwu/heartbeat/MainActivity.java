@@ -50,9 +50,9 @@ public class MainActivity extends ActionBarActivity implements PlayerNotificatio
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_
 
-        NumberPicker np = (NumberPicker) findViewById(R.id.numberPicker);
+                NumberPicker np = (NumberPicker) findViewByIdmain);(R.id.numberPicker);
         np.setMaxValue(180);
         np.setMinValue(50);
         np.setValue(100);

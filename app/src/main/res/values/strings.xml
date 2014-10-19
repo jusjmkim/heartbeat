@@ -3,27 +3,23 @@
 
     <string name="app_name">Heartbeat</string>
     <string name="action_settings">Settings</string>
-
     <string name="md_username">swu2500@yahoo.com</string>
     <string name="md_password">soccer05</string>
-
     <string name="echonest_api_key">SRPHGHXZC9B84CCWR</string>
     <string name="echonest_consumer_key">5322fdb1d04bad8aaf7ad83e42b65195</string>
     <string name="echonest_shared_secret">pT0K2Gz1SyKqts35XRC5Sw</string>
-
     <string name="spotify_client_id">1a52ede18c9f41bf96e3817f2866e66b</string>
     <string name="spotify_client_secret">0c10b4a398884fee9c1bed575d061b4d</string>
     <string name="spotify_redirect_uri">heartbeat://callback</string>
-
     <string name="connect">Connect</string>
     <string name="connect_spotify">Connect with Spotify</string>
     <string name="connect_md">Connect with Music Dealers</string>
-
     <string name="endomondo_key">d177d493c26bce7363d079538189b09a</string>
     <string name="endomondo_secret">d71d7830e9f8837c107ef883ae536dc3</string>
-
     <string name="misfit_key">xUJKzzNDsyl6Lzo2</string>
     <string name="misfit_secret">UyUfT57S2mGa11eu0Fy6praSe7PK090U</string>
     <string name="misfit_redirect_uri">heartbeat://callback</string>
+    <string name="title_activity_end">EndActivity</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>

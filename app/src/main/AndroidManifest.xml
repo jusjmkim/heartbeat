@@ -29,6 +29,14 @@
                     android:scheme="heartbeat" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".EndActivity"
+            android:label="@string/title_activity_end"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="me.sumwu.heartbeat.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
