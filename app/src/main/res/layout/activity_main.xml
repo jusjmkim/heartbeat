@@ -101,11 +101,11 @@
         android:onClick="togglePlayPause" />
 
 <!-- Authentication -->
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/auth"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:background="@color/white" >
 
         <Button
@@ -113,6 +113,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/connect_md"
+            android:id="@+id/connectMD"
             android:onClick="mdConnect" />
 
         <Button
@@ -120,9 +121,45 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/connect_spotify"
+            android:id="@+id/connectSpotify"
             android:onClick="spotifyConnect" />
 
-    </LinearLayout>
+
+
+
+        <ImageView
+            android:id="@+id/spotify_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/b_spotify_icon"
+            android:layout_below="@+id/connectSpotify"
+            android:onClick="spotifyConnect"/>
+
+        <ImageView
+            android:id="@+id/md_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/b_md_logo"
+            android:layout_toRightOf="@id/spotify_icon"
+            android:onClick="mdConnect" />
+
+        <ImageView
+            android:id="@+id/endomondo_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/b_endomondo_logo"
+            android:layout_below="@id/spotify_icon" />
+
+
+        <ImageView
+            android:id="@+id/misfit_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/b_misfit_logo"
+            android:layout_toRightOf="@id/md_icon" />
+
+
+    </RelativeLayout>
 
 
 </RelativeLayout>
