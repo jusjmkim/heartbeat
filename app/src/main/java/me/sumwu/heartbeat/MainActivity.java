@@ -39,6 +39,7 @@ public class MainActivity extends ActionBarActivity implements PlayerNotificatio
 
     ArrayList<String[]> potential_songs = new ArrayList<String[]>();
     ArrayList<String> current_playlist = new ArrayList<String>();
+    ArrayList<String> final_playlist = new ArrayList<String>();
 
     // Music Dealers
     String token;
@@ -50,9 +51,9 @@ public class MainActivity extends ActionBarActivity implements PlayerNotificatio
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_
+        setContentView(R.layout.activity_main);
 
-                NumberPicker np = (NumberPicker) findViewByIdmain);(R.id.numberPicker);
+        NumberPicker np = (NumberPicker) findViewById(R.id.numberPicker);
         np.setMaxValue(180);
         np.setMinValue(50);
         np.setValue(100);
@@ -323,6 +324,13 @@ public class MainActivity extends ActionBarActivity implements PlayerNotificatio
 
     public void playNextSong(View view) {
         mPlayer.skipToNext();
+    }
+
+    public void finish(View view) {
+        Intent intent = new Intent(getApplicationContext(), EndActivity.class);
+        intent.putExtra("AVERAGE_BPM", bpm);
+        intent.putStringArrayListExtra("PLAYLIST", final_playlist);
+        startActivity(intent);
     }
 
     @Override
