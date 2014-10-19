@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -62,9 +63,6 @@ public class MainActivity extends ActionBarActivity implements PlayerNotificatio
         // Music Dealers
         authenticate();
 
-        // Spotify
-        SpotifyAuthentication.openAuthWindow(getString(R.string.spotify_client_id), "token", getString(R.string.spotify_redirect_uri), new String[]{"user-read-private", "streaming"}, null, this);
-
     }
 
     @Override
@@ -86,10 +84,7 @@ public class MainActivity extends ActionBarActivity implements PlayerNotificatio
         return super.onOptionsItemSelected(item);
     }
 
-    /*
-        MUSIC DEALER + SPOTIFY
-     */
-    private void authenticate() {
+    public void authenticate() {
         // Authenticate with Music Dealer Api
         RequestParams login_params = new RequestParams();
         login_params.put("username", getString(R.string.md_username));
@@ -113,6 +108,16 @@ public class MainActivity extends ActionBarActivity implements PlayerNotificatio
         });
     }
 
+    public void spotifyConnect(View view) {
+        LinearLayout auth = (LinearLayout) findViewById(R.id.auth);
+        auth.setVisibility(View.GONE);
+
+        SpotifyAuthentication.openAuthWindow(getString(R.string.spotify_client_id), "token", getString(R.string.spotify_redirect_uri), new String[]{"user-read-private", "streaming"}, null, this);
+    }
+
+    /*
+        MUSIC DEALER + SPOTIFY
+     */
     public void findMusic(View view) {
         Log.i("Heartbeat BPM", "" + bpm);
 
@@ -131,7 +136,7 @@ public class MainActivity extends ActionBarActivity implements PlayerNotificatio
                     JSONArray songs = response.getJSONArray("results");
                     for (int i = 0; i < songs.length(); i++) {
                         JSONObject song = songs.getJSONObject(i);
-                        System.out.println(song.get("title"));
+                        //System.out.println(song.get("title"));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -145,24 +150,18 @@ public class MainActivity extends ActionBarActivity implements PlayerNotificatio
             }
         });
 
-        // Find list of songs from Spotify
-        RequestParams spotify_params = new RequestParams();
-        spotify_params.put("type", "track");
-        spotify_params.put("limit", 1);
-        spotify_params.put("q", "burn");
-        SpotifyApi.get("/search", spotify_params, new JsonHttpResponseHandler() {
+        // Find EchoNest
+        RequestParams en_params = new RequestParams();
+        en_params.put("api_key", getString(R.string.echonest_api_key));
+        en_params.put("genre", "dance+pop");
+        en_params.put("format", "json");
+        en_params.put("results", 20);
+        en_params.put("type", "genre-radio");
+        EchoNestApi.post("/playlist/basic", en_params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
                 System.out.println(response);
-
-                try {
-                    JSONArray songs = response.getJSONArray("items");
-                    String song_id = songs.getJSONObject(0).getString("id");
-                    Log.i("burn id", song_id);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
             }
 
             @Override
@@ -172,10 +171,38 @@ public class MainActivity extends ActionBarActivity implements PlayerNotificatio
             }
         });
 
+
+//        // Find list of songs from Spotify
+//        RequestParams spotify_params = new RequestParams();
+//        spotify_params.put("type", "track");
+//        spotify_params.put("limit", 1);
+//        spotify_params.put("q", "burn");
+//        SpotifyApi.get("/search", spotify_params, new JsonHttpResponseHandler() {
+//            @Override
+//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+//                super.onSuccess(statusCode, headers, response);
+//                System.out.println(response);
+//
+//                try {
+//                    JSONArray songs = response.getJSONArray("items");
+//                    String song_id = songs.getJSONObject(0).getString("id");
+//                    Log.i("burn id", song_id);
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(int statusCode, Header[] headers, String errorResponse, Throwable e) {
+//                super.onFailure(statusCode, headers, errorResponse, e);
+//                System.out.println(errorResponse);
+//            }
+//        });
+
     }
 
     /*
-        SPOTIFY
+        SPOTIFY PLAYER
      */
     @Override
     protected void onNewIntent(Intent intent) {

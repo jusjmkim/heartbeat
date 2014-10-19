@@ -16,7 +16,7 @@ public class MisfitApi {
     private static final String BASE_URL = "https://api.misfitwearables.com";
     private static AsyncHttpClient client = new AsyncHttpClient();
 
-    public static int get(java.lang.String url,
+    public static void get(java.lang.String url,
                           RequestParams params,
                           ResponseHandlerInterface responseHandler) {
         // url should be "/move/resource/v1/user/me/activity/sessions"
