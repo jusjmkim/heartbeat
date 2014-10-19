@@ -18,4 +18,10 @@
     <string name="connect">Connect</string>
     <string name="connect_spotify">Connect with Spotify</string>
 
+    <string name="endomondo_key">d177d493c26bce7363d079538189b09a</string>
+    <string name="endomondo_secret">d71d7830e9f8837c107ef883ae536dc3</string>
+
+    <string name="misfit_key">CedT1J0T3i37Gh5Z</string>
+    <string name="misfit_secret">J1B937C1bqn2SaOeAW7jYI9mlKhcRMNS</string>
+
 </resources>
