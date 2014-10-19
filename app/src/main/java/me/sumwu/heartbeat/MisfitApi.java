@@ -23,6 +23,12 @@ public class MisfitApi {
         client.get(getAbsoluteUrl(url), params, responseHandler);
     }
 
+    public static void post(java.lang.String url,
+                            RequestParams params,
+                            ResponseHandlerInterface responseHandler) {
+        client.post(getAbsoluteUrl(url), params, responseHandler);
+    }
+
     private static String getAbsoluteUrl(String relativeUrl) { return BASE_URL + relativeUrl;}
 
 }
