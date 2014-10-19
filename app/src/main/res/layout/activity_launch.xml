@@ -25,7 +25,7 @@
         android:textColor="@color/white"
         android:textSize="45dp" />
 
-    <TextView
+    <me.sumwu.heartbeat.FadeText
         android:text="get started >"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

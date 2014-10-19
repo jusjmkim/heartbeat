@@ -35,7 +35,8 @@ import java.util.Random;
 
 public class MainActivity extends ActionBarActivity implements PlayerNotificationCallback, ConnectionStateCallback {
 
-    ArrayList<String[]> potential_songs = new ArrayList<String[]>();
+    ArrayList<String[]> md_potential_songs = new ArrayList<String[]>();
+    ArrayList<String[]> en_potential_songs = new ArrayList<String[]>();
     ArrayList<String> current_playlist = new ArrayList<String>();
     ArrayList<String> final_playlist = new ArrayList<String>();
 
@@ -145,16 +146,16 @@ public class MainActivity extends ActionBarActivity implements PlayerNotificatio
                         JSONObject artist = song.getJSONObject("artist");
 
                         String[] potential_song = {song.get("title").toString(), artist.get("name").toString()};
-                        potential_songs.add(potential_song);
+                        md_potential_songs.add(potential_song);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
                 // Determine which of those songs are available on Spotify
-                for (int i = 0; i < potential_songs.size(); i++) {
-                    String title = potential_songs.get(i)[0];
-                    String artist = potential_songs.get(i)[1];
+                for (int i = 0; i < md_potential_songs.size(); i++) {
+                    String title = md_potential_songs.get(i)[0];
+                    String artist = md_potential_songs.get(i)[1];
                     System.out.println("checking: " + title + " by " + artist);
                     checkSpotifyAvailability(title, artist);
                 }
@@ -185,6 +186,15 @@ public class MainActivity extends ActionBarActivity implements PlayerNotificatio
                 System.out.println("ECHONEST SUCCESSFUL" + response);
 
                 // extract spotify ids of echonest, then filter out the ones with the right bpm
+                try {
+                    JSONArray songs = response.getJSONObject("response").getJSONArray("songs");
+                    for (int i = 0; i < songs.length(); i++) {
+                        //String[] = {};
+                        //en_potential_songs.add();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
