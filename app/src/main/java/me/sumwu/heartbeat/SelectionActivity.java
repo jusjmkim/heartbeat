@@ -2,10 +2,12 @@ package me.sumwu.heartbeat;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 
 import me.sumwu.heartbeat.R;
 
@@ -38,6 +40,8 @@ public class SelectionActivity extends Activity {
     }
 
     public void selectWorkout(View view) {
+        ImageView selection = (ImageView) view;
+        selection.setImageResource(R.drawable.d_checked_icon);
         finish();
     }
 }

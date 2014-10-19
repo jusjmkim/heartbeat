@@ -32,6 +32,8 @@
         android:layout_marginTop="400dp"
         android:layout_centerHorizontal="true"
         android:textColor="@color/white"
-        android:textSize="30dp" />
+        android:textSize="30dp"
+        android:clickable="true"
+        android:onClick="getStarted" />
 
 </RelativeLayout>
