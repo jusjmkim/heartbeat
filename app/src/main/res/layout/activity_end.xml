@@ -9,8 +9,70 @@
     tools:context="me.sumwu.heartbeat.EndActivity">
 
     <TextView
-        android:text="@string/hello_world"
+        android:text="My pace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+    <ImageView
+        android:src="@drawable/h_pace_graph"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:src="@drawable/h_workout_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="75dp" />
+
+    <TextView
+        android:text="My Music"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="275dp"
+        android:layout_marginLeft="75dp" />
+
+    <TextView
+        android:text="Anaconda - Nicki Minaj"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300dp"
+        android:layout_marginLeft="75dp" />
+
+    <TextView
+        android:text="Party Rock Anthem - ..."
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="325dp"
+        android:layout_marginLeft="75dp"/>
+
+    <TextView
+        android:text="Hall of Fame - The Scr..."
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="350dp"
+        android:layout_marginLeft="75dp" />
+
+    <TextView
+        android:text="Scary Monsters and Nic..."
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="375dp"
+        android:layout_marginLeft="75dp" />
+
+    <TextView
+        android:text="On Top of the World - ..."
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="400dp"
+        android:layout_marginLeft="75dp" />
+
+    <ImageView
+        android:src="@drawable/g_music_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="420dp"
+        android:layout_marginLeft="75dp" />
+
 
 </RelativeLayout>
