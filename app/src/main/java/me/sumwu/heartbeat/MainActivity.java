@@ -60,9 +60,8 @@ public class MainActivity extends ActionBarActivity implements PlayerNotificatio
 
         bpm = np.getValue();
 
-        // Music Dealers
-        authenticate();
-
+        // Authenticate with Music Dealers
+        mdAuth();
     }
 
     @Override
@@ -84,7 +83,7 @@ public class MainActivity extends ActionBarActivity implements PlayerNotificatio
         return super.onOptionsItemSelected(item);
     }
 
-    public void authenticate() {
+    public void mdAuth() {
         // Authenticate with Music Dealer Api
         RequestParams login_params = new RequestParams();
         login_params.put("username", getString(R.string.md_username));
@@ -150,18 +149,45 @@ public class MainActivity extends ActionBarActivity implements PlayerNotificatio
             }
         });
 
-        // Find EchoNest
+        // Create playlist with EchoNest Api
         RequestParams en_params = new RequestParams();
         en_params.put("api_key", getString(R.string.echonest_api_key));
-        en_params.put("genre", "dance+pop");
+        en_params.put("genre", "pop");
         en_params.put("format", "json");
-        en_params.put("results", 20);
+        en_params.put("results", "20");
         en_params.put("type", "genre-radio");
-        EchoNestApi.post("/playlist/basic", en_params, new JsonHttpResponseHandler() {
+        EchoNestApi.get("playlist/basic", en_params, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                System.out.println("ECHONEST SUCCESSFUL" + response);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String errorResponse, Throwable e) {
+                super.onFailure(statusCode, headers, errorResponse, e);
+                System.out.println("ECHONEST ERROR" + errorResponse);
+            }
+        });
+
+        // Find list of songs from Spotify
+        RequestParams spotify_params = new RequestParams();
+        spotify_params.put("type", "track");
+        spotify_params.put("limit", 1);
+        spotify_params.put("q", "burn");
+        SpotifyApi.get("search", spotify_params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
                 System.out.println(response);
+
+                try {
+                    JSONArray songs = response.getJSONArray("items");
+                    String song_id = songs.getJSONObject(0).getString("id");
+                    Log.i("burn id", song_id);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -170,34 +196,6 @@ public class MainActivity extends ActionBarActivity implements PlayerNotificatio
                 System.out.println(errorResponse);
             }
         });
-
-
-//        // Find list of songs from Spotify
-//        RequestParams spotify_params = new RequestParams();
-//        spotify_params.put("type", "track");
-//        spotify_params.put("limit", 1);
-//        spotify_params.put("q", "burn");
-//        SpotifyApi.get("/search", spotify_params, new JsonHttpResponseHandler() {
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-//                super.onSuccess(statusCode, headers, response);
-//                System.out.println(response);
-//
-//                try {
-//                    JSONArray songs = response.getJSONArray("items");
-//                    String song_id = songs.getJSONObject(0).getString("id");
-//                    Log.i("burn id", song_id);
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(int statusCode, Header[] headers, String errorResponse, Throwable e) {
-//                super.onFailure(statusCode, headers, errorResponse, e);
-//                System.out.println(errorResponse);
-//            }
-//        });
 
     }
 
