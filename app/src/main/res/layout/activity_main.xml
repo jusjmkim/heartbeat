@@ -106,7 +106,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/white" >
+        android:background="@color/white"
+        android:visibility="gone" >
 
         <TextView
             android:text="Connect with"
@@ -150,7 +151,7 @@
             android:layout_marginLeft="210dp"
             android:textSize="20dp"/>
 
-        <me.sumwu.heartbeat.DarkenButton
+        <ImageView
             android:id="@+id/endomondo_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -164,9 +165,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="465dp"
             android:layout_marginLeft="40dp"
-            android:textSize="20dp"/>
+            android:textSize="20dp" />
 
-        <me.sumwu.heartbeat.DarkenButton
+        <ImageView
             android:id="@+id/misfit_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
