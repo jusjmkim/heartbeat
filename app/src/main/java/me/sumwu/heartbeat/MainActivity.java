@@ -36,8 +36,8 @@ import java.util.Random;
 
 public class MainActivity extends ActionBarActivity implements PlayerNotificationCallback, ConnectionStateCallback {
 
-    ArrayList<String[]> md_potential_songs = new ArrayList<String[]>();
     ArrayList<String[]> en_potential_songs = new ArrayList<String[]>();
+    ArrayList<String[]> md_potential_songs = new ArrayList<String[]>();
     ArrayList<String> current_playlist = new ArrayList<String>();
     ArrayList<String> final_playlist = new ArrayList<String>();
 
@@ -53,18 +53,7 @@ public class MainActivity extends ActionBarActivity implements PlayerNotificatio
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        NumberPicker np = (NumberPicker) findViewById(R.id.numberPicker);
-//        np.setMaxValue(180);
-//        np.setMinValue(50);
-//        np.setValue(100);
-//        np.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-//            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-//                // Save the value in the number picker
-//                bpm = newVal;
-//            }
-//        });
-
-        bpm = 100;//np.getValue();
+        bpm = 100;
     }
 
     @Override
@@ -124,11 +113,9 @@ public class MainActivity extends ActionBarActivity implements PlayerNotificatio
     }
 
     /*
-        MUSIC DEALER + SPOTIFY
+        GENERATING THE PLAYLIST
      */
     public void findMusic(View view) {
-        Log.i("Heartbeat BPM", "" + bpm);
-
         // Find list of songs with the right bpm with Music Dealer Api
         Header[] headers = {new BasicHeader("X-Auth-Token", token)};
         RequestParams md_params = new RequestParams();
@@ -157,7 +144,6 @@ public class MainActivity extends ActionBarActivity implements PlayerNotificatio
                 for (int i = 0; i < md_potential_songs.size(); i++) {
                     String title = md_potential_songs.get(i)[0];
                     String artist = md_potential_songs.get(i)[1];
-                    System.out.println("checking: " + title + " by " + artist);
                     checkSpotifyAvailability(title, artist);
                 }
 
@@ -169,32 +155,36 @@ public class MainActivity extends ActionBarActivity implements PlayerNotificatio
                 System.out.println(errorResponse);
             }
         });
-
         // Create playlist with EchoNest Api
         RequestParams en_params = new RequestParams();
         en_params.put("api_key", getString(R.string.echonest_api_key));
-        en_params.put("genre", "pop");
-        en_params.put("format", "json");
-        en_params.put("results", "100");
-        en_params.put("type", "genre-radio");
-        en_params.put("limited_interactivity", "true");
-        en_params.put("bucket", "tracks");
-        en_params.put("bucket", "id:spotify");
-        EchoNestApi.get("playlist/basic", en_params, new JsonHttpResponseHandler() {
+        en_params.put("min_tempo", bpm - 5);
+        en_params.put("max_tempo", bpm + 5);
+        en_params.put("results", 20);
+        en_params.put("min_energy", 0.8);
+        en_params.put("song_min_hotttnesss", 0.8);
+        EchoNestApi.get("song/search", en_params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
-                System.out.println("ECHONEST SUCCESSFUL" + response);
 
-                // extract spotify ids of echonest, then filter out the ones with the right bpm
+                // extract names and artists from echonest
                 try {
                     JSONArray songs = response.getJSONObject("response").getJSONArray("songs");
                     for (int i = 0; i < songs.length(); i++) {
-                        //String[] = {};
-                        //en_potential_songs.add();
+                        JSONObject song = songs.getJSONObject(i);
+                        String[] potential_song = {song.get("title").toString(), song.get("artist_name").toString()};
+                        en_potential_songs.add(potential_song);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                }
+
+                // Determine which of those songs are available on Spotify
+                for (int i = 0; i < en_potential_songs.size(); i++) {
+                    String title = en_potential_songs.get(i)[0];
+                    String artist = en_potential_songs.get(i)[1];
+                    checkSpotifyAvailability(title, artist);
                 }
             }
 
@@ -207,10 +197,10 @@ public class MainActivity extends ActionBarActivity implements PlayerNotificatio
 
     }
 
-    // CHECK WHICH SONGS FROM MUSIC DEALERS ARE AVAILABLE ON SPOTIFY
-    private void checkSpotifyAvailability(String title, final String artist) {
+    // CHECK WHICH SONGS FROM MUSIC DEALERS AND ECHONEST ARE AVAILABLE ON SPOTIFY
+    private void checkSpotifyAvailability(final String title, final String artist) {
         // Find list of songs from Spotify
-        final RequestParams spotify_params = new RequestParams();
+        RequestParams spotify_params = new RequestParams();
         spotify_params.put("type", "track");
         spotify_params.put("limit", 1);
         spotify_params.put("q", title);
@@ -218,15 +208,13 @@ public class MainActivity extends ActionBarActivity implements PlayerNotificatio
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
-                System.out.println("SPOTIFY RESPONSE: " + response);
 
                 try {
                     JSONArray items = response.getJSONObject("tracks").getJSONArray("items");
 
                     JSONArray spotify_artists = items.getJSONObject(0).getJSONArray("artists");
                     String spotify_artist = spotify_artists.getJSONObject(0).get("name").toString();
-                    System.out.println(artist + " and " + spotify_artist + ", current playlist: " + current_playlist);
-                    if (artist != spotify_artist) { return; }
+                    if (!artist.equals(spotify_artist)) { return; }
 
                     String song_id = items.getJSONObject(0).get("id").toString();
                     current_playlist.add(song_id);
