@@ -2,7 +2,7 @@ Heartbeat
 =========
 
 ## Description
-
+Built at Share a #Hack. Heartbeat uses the user's historic fitness data through either the Misfit Shine or Endomondo to play or suggest new songs that matches the user's rate of running.
 
 ## Screenshots
 [1. Start screen](https://drive.google.com/file/d/0B6PT84V70dgYbUotcXNBTDA4NEk/view?usp=sharing)<br>
@@ -12,18 +12,6 @@ Heartbeat
 [5. Paused play screen](https://drive.google.com/file/d/0B6PT84V70dgYT2xYbkFoVTRrd2c/view?usp=sharing)<br>
 [6. Running play screen](https://drive.google.com/file/d/0B6PT84V70dgYRjUtU0JlQ29QTEk/view?usp=sharing)<br>
 [7. Summary screen](https://drive.google.com/file/d/0B6PT84V70dgYU1pqamRsQ2NXVms/view?usp=sharing)<br>
-
-
-## Background
-
-
-
-## Features
-
-
-
-## Usage
-
 
 ## Authors
 
