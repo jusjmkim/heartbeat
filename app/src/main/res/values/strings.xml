@@ -14,6 +14,7 @@
     <string name="connect">Connect</string>
     <string name="connect_spotify">Connect with Spotify</string>
     <string name="connect_md">Connect with Music Dealers</string>
+    <string name="endomondo">Endomondo</string>
     <string name="endomondo_key">d177d493c26bce7363d079538189b09a</string>
     <string name="endomondo_secret">d71d7830e9f8837c107ef883ae536dc3</string>
     <string name="misfit_key">xUJKzzNDsyl6Lzo2</string>
