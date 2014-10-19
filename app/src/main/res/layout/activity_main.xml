@@ -121,7 +121,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/b_spotify_icon"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="120dp"
             android:layout_marginLeft="30dp"
             android:onClick="spotifyConnect" />
 
@@ -129,7 +129,7 @@
             android:text="Spotify"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="240dp"
+            android:layout_marginTop="260dp"
             android:layout_marginLeft="60dp"
             android:textSize="20dp" />
 
@@ -138,7 +138,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/b_md_logo"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="120dp"
             android:layout_marginLeft="200dp"
             android:onClick="mdConnect" />
 
@@ -146,7 +146,7 @@
             android:text="Music Dealers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="240dp"
+            android:layout_marginTop="260dp"
             android:layout_marginLeft="210dp"
             android:textSize="20dp"/>
 
@@ -155,14 +155,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/b_endomondo_logo"
-            android:layout_marginTop="300dp"
+            android:layout_marginTop="320dp"
             android:layout_marginLeft="30dp" />
 
         <TextView
             android:text="Endomondo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="445dp"
+            android:layout_marginTop="465dp"
             android:layout_marginLeft="40dp"
             android:textSize="20dp"/>
 
@@ -171,14 +171,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/b_misfit_logo"
-            android:layout_marginTop="300dp"
+            android:layout_marginTop="320dp"
             android:layout_marginLeft="200dp"/>
 
         <TextView
             android:text="Misfit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="445dp"
+            android:layout_marginTop="465dp"
             android:layout_marginLeft="240dp"
             android:textSize="20dp" />
 
