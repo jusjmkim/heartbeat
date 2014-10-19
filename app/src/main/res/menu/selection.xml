@@ -5,4 +5,8 @@
         android:title="@string/action_settings"
         android:orderInCategory="100"
         android:showAsAction="never" />
+    <item android:id="@+id/endomondo"
+        android:icon="@drawable/c_endomondo_logo_white"
+        android:title="@string/endomondo"
+        android:showAsAction="always" />
 </menu>
