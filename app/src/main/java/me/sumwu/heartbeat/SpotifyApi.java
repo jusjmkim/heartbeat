@@ -17,7 +17,6 @@ public class SpotifyApi {
                            RequestParams params,
                            ResponseHandlerInterface responseHandler) {
         client.get(getAbsoluteUrl(url), params, responseHandler);
-        System.out.println("just submitted a get request for spotify so this should be working");
     }
 
     private static String getAbsoluteUrl(String relativeUrl) {
