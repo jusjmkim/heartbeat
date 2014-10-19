@@ -11,68 +11,77 @@
     <TextView
         android:text="My pace"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textSize="35dp" />
 
     <ImageView
         android:src="@drawable/h_pace_graph"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="53dp"
+        android:layout_centerHorizontal="true" />
 
     <ImageView
         android:src="@drawable/h_workout_button"
-        android:layout_width="wrap_content"
+        android:layout_width="175dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
-        android:layout_marginLeft="75dp" />
+        android:layout_marginTop="210dp"
+        android:layout_marginLeft="150dp" />
 
     <TextView
-        android:text="My Music"
+        android:text="My music"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="275dp"
-        android:layout_marginLeft="75dp" />
+        android:layout_marginTop="257dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="35dp" />
 
     <TextView
         android:text="Anaconda - Nicki Minaj"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="300dp"
-        android:layout_marginLeft="75dp" />
+        android:layout_marginLeft="50dp"
+        android:textSize="23dp" />
 
     <TextView
         android:text="Party Rock Anthem - ..."
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="325dp"
-        android:layout_marginLeft="75dp"/>
+        android:layout_marginTop="330dp"
+        android:layout_marginLeft="50dp"
+        android:textSize="23dp" />
 
     <TextView
         android:text="Hall of Fame - The Scr..."
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="350dp"
-        android:layout_marginLeft="75dp" />
+        android:layout_marginTop="360dp"
+        android:layout_marginLeft="50dp"
+        android:textSize="23dp" />
 
     <TextView
         android:text="Scary Monsters and Nic..."
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="375dp"
-        android:layout_marginLeft="75dp" />
+        android:layout_marginTop="390dp"
+        android:layout_marginLeft="50dp"
+        android:textSize="23dp" />
 
     <TextView
         android:text="On Top of the World - ..."
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="400dp"
-        android:layout_marginLeft="75dp" />
+        android:layout_marginTop="420dp"
+        android:layout_marginLeft="50dp"
+        android:textSize="23dp" />
 
     <ImageView
         android:src="@drawable/g_music_button"
-        android:layout_width="wrap_content"
+        android:layout_width="175dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="420dp"
-        android:layout_marginLeft="75dp" />
-
+        android:layout_marginTop="465dp"
+        android:layout_marginLeft="150dp" />
 
 </RelativeLayout>
